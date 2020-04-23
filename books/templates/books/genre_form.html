@@ -1,0 +1,26 @@
+{% extends "books\main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<br>
+<div class="col-md-6">
+<div class="card card-body">
+<h5>Add Genre</h5>
+</div>
+<br>
+		<div class="card card-body">
+
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{ form|crispy }}
+
+				
+                <a class="btn btn-warning" href="{% url 'books:genrelist' %}">Cancel</a>
+				<input type="submit" class="btn btn-primary" name="Submit">
+                
+			</form>
+
+		</div>
+	</div>
+
+{% endblock %}

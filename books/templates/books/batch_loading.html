@@ -1,0 +1,67 @@
+{% extends "books\main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<br>
+
+<div class="col-md 5">
+	<div class="card card-body">
+	  <h5>Batch Loading</h5>
+</div>  
+<br>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="card card-body">
+				<hr>
+				<h3 style="text-align: center">Batch Upload</h3>
+				<hr>
+				<h4 style="text-align: center"><i>Important Note</i></h4>
+				<hr>
+				<p>Please ensure the following before uploading:</p>
+				<ol>
+					<li>The file format should be Excel file with <b>.XLSX</b> extension</li>
+					<li>There should be the following column in the excel sheet:</li>
+						<ol>
+							<li><b>book_title</b></li>
+							<li><b>author</b></li>
+							<li><b>genre</b></li>
+							<li><b>image_url</b></li>
+						</ol>
+					<li><b>book_title</b> and <b>author</b> cannot be empty</li>
+					<li><b>genre</b> and <b>image_url</b> can be empty but has to be present in the excel sheet</li>
+					<li>Loading may take time, be patient.</li>
+				</ol>
+				<hr>
+				<h4 style="text-align: center">Errors will be displayed here:</h4>
+				<ol>
+				{% if messages %}
+					{% for message in messages %}
+					
+					<li><i>{{message}}</i></li>
+					{% endfor %}
+				{% endif %}
+				</ol>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="card card-body">
+				
+				<form action="" method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					{{ form|crispy }}
+				<br>
+					
+					<input type="submit" class="btn btn-primary" name="Submit">
+					
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+{% endblock %}

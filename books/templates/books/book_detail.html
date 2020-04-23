@@ -1,0 +1,75 @@
+{% extends "books\main.html" %}
+
+{% block content %}
+
+<br>
+<div class="row">
+	<div class="col-md-1">
+        {% if object.image_url %}
+        <img src="{{ book.image_url }}"  alt="{{ object.title }}" style="width: 100px;">
+    {% else %}
+        <img src="{{ book.cover.url }}"  alt="{{ object.title }}" style="width: 100px;">
+    {% endif %}
+	</div>
+	<div class="col-md-9">
+		<div class="card card-body">
+            <div><strong>Book Title:</strong>&emsp;<i>{{object.title}}</i></div>
+            <div><strong>Author:</strong>&emsp;<i>
+                {% for auth in object.author.all %}
+                <a href="{% url 'books:authordetail' auth.slug %}">{{ auth.first_name }} {{ auth.last_name }}</a> &emsp;
+            {% endfor %}
+
+            </i></div>
+            <div><strong>Summary:</strong>&emsp;<i></i></div>
+            
+            {% if request.user.is_staff %}
+                <div><strong>Did you read it?</strong>&emsp;
+                    {% if object.read == 'n'%}
+                        <i>No</i>
+                    {% else %}
+                        <i>Yes</i>
+                    {% endif %}
+                </div>
+            {% endif %}
+                
+
+            <div><strong>Genre:</strong>&emsp;
+                {% for genre in object.genre.all %} <a href="{% url 'books:genredetail' genre.slug %}"> {{ genre }} </a>{% if not forloop.last %}, {% endif %}{% endfor %}
+            </div>
+            
+            
+            {% if object.file %}
+                <div><strong>Format:</strong>&emsp;<i>{{object.extension}}</i></div>
+            {% endif %}
+                
+
+            {% if request.user.is_authenticated %}
+            <div><strong>Download:</strong>&emsp;
+                {% if object.file %}
+                   <a href="{{ object.file.url }}" class="btn btn-primary btn-sm" target="_blank">Download</a>
+                   {% else %}
+                   <i>Unavailable</i>
+                {% endif %}
+            {% endif %}
+
+            <div><strong>Added On:  </strong>&emsp;<i>{{object.created_on}}</i></div>
+            <div><strong>Last Updated On:  </strong>&emsp;<i>{{object.updated_on}}</i></div>
+
+            </div>
+        </div>
+        <br>
+        
+        {% if request.user.is_staff %}
+            <a class="btn btn-sm btn-warning" href="{% url 'books:bookupdate' object.slug %}">Update</a>
+            <a class="btn btn-sm btn-danger" href="{% url 'books:bookdelete' object.slug %}">Delete</a>
+        {% endif %}
+            
+
+
+	</div>
+</div>
+
+
+
+{% endblock content %}
+

@@ -1,0 +1,16 @@
+{% extends 'books/main.html' %}
+
+{% block content %}
+<br>
+<div class="col-md-5">
+    <div class="card card-body">
+        <div><strong>Do you want to delete the reading list:  </strong><i>{{object.title}}</i>?</div>
+        <br>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+            <a class="btn btn-outline-secondary" href="{% url 'books:tbrdetail' object.slug %}">No</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

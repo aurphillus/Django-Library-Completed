@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/png" href="{% static 'common/favicon.ico' %}"/>
+
+  <title>BookShack</title>
+  <!--
+-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+  <!-- Google web font "Open Sans" -->
+  <link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.min.css"> <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'landingpage/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'landingpage/slick/slick.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'landingpage/slick/slick-theme.css' %}" />
+
+  <link rel="stylesheet" href="{% static 'landingpage/css/tooplate-style.css' %}"><!-- tooplate style -->
+  <!-- Magnific Popup core CSS file -->
+  <link rel="stylesheet" href="{% static 'landingpage/css/magnific-popup.css'%}">
+</head>
+
+<body>
+  <div class="parallax-window" data-parallax="scroll" data-image-src="{% static 'landingpage/img/bg-img-01.jpg' %}">
+    <section class="container tm-page-1-content">
+      <div class="row">
+        <div class="col-md-6 ml-auto tm-text-white">
+          <header>
+            <h1> Books </h1>
+          </header>
+          <p> “Quote Coming Soon!” <br> <br> <i>very soon</i> </p>
+          <a href="{% url 'books:home' %}" target="_blank" class="btn btn-danger">Explore </a>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- load JS files -->
+  <script src="{% static 'landingpage/js/jquery-1.11.3.min.js'%}"></script> 
+  <script src="{% static 'landingpage/js/parallax.min.js'%}"></script>
+
+  <script type="text/javascript" src="{% static 'landingpage/slick/slick.min.js'%}"></script>
+  <!-- Slick Carousel -->
+  <div class="LoaderBalls">
+    <div class="LoaderBalls__item"></div>
+    <div class="LoaderBalls__item"></div>
+    <div class="LoaderBalls__item"></div>
+  </div>
+  <!-- Magnific Popup core JS file -->
+  <script src="{% static 'landingpage/js/jquery.magnific-popup.min.js'%}"></script>
+
+
+
+  <script>
+
+    function setCarousel() {
+
+      var slider = $('.tm-img-slider');
+
+      if (slider.hasClass('slick-initialized')) {
+        slider.slick('destroy');
+      }
+
+      if ($(window).width() > 991) {
+        // Slick carousel
+        slider.slick({
+          dots: true,
+          infinite: true,
+          slidesToShow: 4,
+          slidesToScroll: 1
+        });
+      }
+      else {
+        slider.slick({
+          dots: true,
+          infinite: true,
+          slidesToShow: 2,
+          slidesToScroll: 1
+        });
+      }
+    }
+
+    $(document).ready(function () {
+
+      setCarousel();
+      $('.tm-img-slider').magnificPopup({
+        delegate: 'a', // child items selector, by clicking on it popup will open
+        type: 'image'
+        // other options
+
+      });
+
+      $(window).resize(function () {
+        setCarousel();
+      });
+    });
+
+  </script>
+</body>
+</html>

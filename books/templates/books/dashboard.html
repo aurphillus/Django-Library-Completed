@@ -1,0 +1,85 @@
+{%  extends 'books/main.html' %}
+
+{% block content %}
+
+{%  include 'books/status.html' %}
+
+<br>
+
+<div class="row">
+	<div class="col-md-5">
+		<div class="card card-body">
+
+		<h5>Reading List:</h5>
+		</div>
+		<hr>
+		<div class="card card-body">
+			
+			{% if request.user.is_staff %}
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'books:tbrcreate' %}">Add Reading List</a>
+			{% endif %}
+				
+			<table class="table table-sm">
+				<tr>
+					<th>Reading List Name</th>
+					<th>No. of books</th>
+					<th>View</th>
+				</tr>
+
+				{% for tbr in tbr_list %}
+					<tr>
+						<td>{{tbr.title}}</td>
+						<td>{{tbr.book.count}}</td>
+						<td><a class="btn btn-sm btn-info" href="{% url 'books:tbrdetail' tbr.slug %}">View</a></td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<div class="card card-body">
+
+		<h5>Recent Added Books</h5>
+		</div>
+		<hr>
+		<div class="card card-body">
+			
+			<table class="table table-sm">
+				<tr>
+					<th>Title</th>
+					<th>View</th>
+					
+					{% if request.user.is_staff %}
+						<th>Update</th>
+						<th>Remove</th>
+					{% endif %}
+						
+
+				</tr>
+
+				{% for book in latest %}
+					<tr>
+						<td>{{book.title}}</td>
+						<td><a class="btn btn-sm btn-info" href="{% url 'books:bookdetail' book.slug %}">View</a></td>
+						
+						{% if request.user.is_staff %}
+							<td><a class="btn btn-sm btn-warning" href="{% url 'books:bookupdate' book.slug %}">Update</a></td>
+							<td><a class="btn btn-sm btn-danger" href="{% url 'books:bookdelete' book.slug %}">Delete</a></td>
+						{% endif %}
+							
+
+
+					</tr>
+				{% endfor %}
+
+		
+			</table>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}
+

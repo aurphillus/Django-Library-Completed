@@ -1,0 +1,36 @@
+{% extends "books\main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<br>
+
+<h5>Batch Upload</h1>
+
+	<div class="row">
+		<div class="col-md-3">
+			<div class="card card-body">
+				<hr>
+				<h3 style="text-align: center">Upload Details</h3>
+				<hr>
+            <div><strong>Books Added:  </strong>&emsp;<i>{{book}}</i></div>
+            <div><strong>Authors Added:  </strong>&emsp;<i>{{author}}</i></div>
+            <div><strong>Genres Added:  </strong>&emsp;<i>{{genre}}</i></div>
+            <div><strong>Reading List Added:  </strong>&emsp;<i>{{tbr}}</i></div>
+
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="card card-body">
+                <h1>Succesfully Loaded</h1>
+                <hr>
+                <ul>
+                    {% for list in log %}
+                      <li>{{ list }}</li>
+                    {% endfor %}
+                </ul>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

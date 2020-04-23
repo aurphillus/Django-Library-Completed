@@ -1,0 +1,35 @@
+{% extends "books/main.html" %}
+{% load bootstrap %}
+{% block content %}
+
+
+
+<br>
+<div class="container">
+    <div class="card card-body">
+        <form method="GET">
+            {{filter.form|bootstrap}}
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+</div>
+</div>
+<br>
+<br>
+<div class="container">
+    <div class="card card-body">
+    <ul>
+        {% for book in filter.qs %}
+            <a href="{% url 'books:bookdetail' book.slug %}">{{book.title}}</a>
+            <hr>
+        {% endfor %}
+    </ul>
+</div>
+
+</div>
+
+<br>
+
+
+
+{% endblock content %}
